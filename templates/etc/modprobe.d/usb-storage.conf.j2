@@ -1,0 +1,5 @@
+{{ ansible_managed | comment }}
+
+# CIS: Ensure mounting of cramfs filesystems is disabled (Automated)
+install cramfs /bin/false
+blacklist cramfs
