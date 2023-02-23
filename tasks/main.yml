@@ -3,28 +3,31 @@
 # SPDX short identifier: BSD-3-Clause
 ---
 
-- name: CIS | Ensure mounting of usb-storage filesystem is disabled
-  tags:
-    - 'CIS-RHEL8-v2.0.0'
-    - 'CIS-RHEL8-v2.0.0_1.1.1.1'
-    - 'CISv8-4.8-IG2'
-    - 'CISv8-4.8-IG3'
+# We put the entire role in a block so we can create
+# a role specific tag, which saves the caller from
+# having to do so in their playbook.
+- name: Role foolean/usb
   block:
-  - name: Configure usb-storage module
-    become: true
-    ansible.builtin.template:
-      src: 'etc/modprobe.d/usb-storage.conf.j2'
-      dest: '/etc/modprobe.d/usb-storage.conf'
-      owner: 'root'
-      group: 'root'
-      mode: '0644'
-    when:
-      - ansible_os_family in ['Debian', 'RedHat']
 
-  - name: Unload usb-storage module
-    become: true
-    ansible.builtin.modprobe:
-      name: 'usb-storage'
-      state: absent
-    when:
-      - ansible_os_family in ['Debian', 'RedHat']
+    - name: Configure usb-storage module
+      become: true
+      ansible.builtin.template:
+        src: 'etc/modprobe.d/usb-storage.conf.j2'
+        dest: '/etc/modprobe.d/usb-storage.conf'
+        owner: 'root'
+        group: 'root'
+        mode: '0644'
+      when:
+        - ansible_os_family in ['Debian', 'RedHat']
+
+    - name: Unload usb-storage module
+      become: true
+      ansible.builtin.modprobe:
+        name: 'usb-storage'
+        state: absent
+      when:
+        - ansible_os_family in ['Debian', 'RedHat']
+
+  # Tags to be applied to this role (block)
+  tags:
+    - 'role_foolean_usb'
