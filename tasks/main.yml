@@ -18,7 +18,7 @@
         group: 'root'
         mode: '0644'
       when:
-        - ansible_os_family in ['Debian', 'RedHat']
+        - ansible_system == 'Linux'
 
     - name: Unload usb-storage module
       become: true
@@ -26,7 +26,7 @@
         name: 'usb-storage'
         state: absent
       when:
-        - ansible_os_family in ['Debian', 'RedHat']
+        - ansible_system == 'Linux'
 
   # Tags to be applied to this role (block)
   tags:
