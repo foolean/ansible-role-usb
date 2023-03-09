@@ -28,6 +28,10 @@
       when:
         - ansible_system == 'Linux'
 
+  when:
+    # USB storage is built-in to Raspberry Pi images
+    - ansible_lsb.id|lower != "raspbian"
+
   # Tags to be applied to this role (block)
   tags:
     - 'role_foolean_usb'

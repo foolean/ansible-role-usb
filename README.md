@@ -34,6 +34,7 @@ Ansible role to manage the usb filesystem module
     * Debian (11)
     * RedHat (8)
     * Rocky (8)
+    * Raspbian (11)
 
 
 ## Compliance
@@ -41,6 +42,11 @@ Ansible role to manage the usb filesystem module
     * CIS Debian Linux 11 Benchmark v1.0.0
     * CIS RedHat Enterprise Linux 8 Benchmark v2.0.0
     * CIS Rocky Linux 8 Benchmark v1.0.0
+
+
+### Deviations
+
+    Raspberry Pi devices require USB
 
 
 ## License
